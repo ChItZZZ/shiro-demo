@@ -4,6 +4,7 @@ import club.shzhong.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +26,25 @@ public class UserController {
             return e.getMessage();
         }
 
-        if(subject.hasRole("admin")){
+        if (subject.hasRole("admin")) {
             return "有admin权限";
         }
 
         return "无admin权限";
+    }
+
+    @RequestMapping(value = "/testRole", method = RequestMethod.GET)
+    @ResponseBody
+    @RequiresRoles("admin")
+    public String testRole() {
+        return "test role success";
+    }
+
+
+    @RequestMapping(value = "/testRole1", method = RequestMethod.GET)
+    @ResponseBody
+    @RequiresRoles("admin1")
+    public String testRole1() {
+        return "test role success";
     }
 }

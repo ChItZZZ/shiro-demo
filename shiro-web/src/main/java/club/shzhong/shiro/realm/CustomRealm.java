@@ -8,6 +8,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -65,6 +66,7 @@ public class CustomRealm extends AuthorizingRealm {
         if (password == null) {
             return null;
         }
+        //认证，登录的username，数据库的password，根据username获取登录的password进行对比
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, "customRealm");
 //        加盐
         authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(username));
@@ -81,6 +83,7 @@ public class CustomRealm extends AuthorizingRealm {
     }
 
 //    public static void main(String[] args) {
+////        source 原始密码 salt 盐
 //        Md5Hash md5Hash = new Md5Hash("123", "mark");
 //        System.out.println(md5Hash);
 //    }

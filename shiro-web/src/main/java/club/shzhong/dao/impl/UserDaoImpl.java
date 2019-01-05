@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 
                 User user = new User();
                 user.setUsername(rs.getString("username"));
-                user.setUsername(rs.getString("password"));
+                user.setPassword(rs.getString("password"));
                 return user;
             }
         });
@@ -41,14 +41,11 @@ public class UserDaoImpl implements UserDao {
             return null;
         }
         return list.get(0);
-
-
-
     }
 
     @Override
     public List<String> queryRolesByUsername(String username)  {
-        String sql = "select role_name from user_roles where username = ?";
+        String sql = "select role_name from users_roles where username = ?";
         return jdbcTemplate.query(sql, new String[]{username}, new RowMapper<String>() {
             @Override
             public String mapRow(ResultSet rs, int rowNum) throws SQLException {
