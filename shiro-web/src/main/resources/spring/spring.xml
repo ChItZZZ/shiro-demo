@@ -2,9 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    
+
     <import resource="spring-dao.xml"/>
     <context:component-scan base-package="club.shzhong"/>
 
@@ -16,11 +17,21 @@
             <value>
                 /login.html = anon
                 /subLogin = anon
+                /testRole = rolesOr["admin","admin1"]
+                /testRole1 = roles["admin","admin1"]
+                /testPerms = perms["user:delete"]
+                /testPerms1 = perms["user:delete","user:update"]
                 /* = authc
             </value>
         </property>
+        <property name="filters">
+            <util:map>
+                <entry key="roleOr" value-ref="roleOrFilter"/>
+            </util:map>
+        </property>
     </bean>
 
+    <bean class="club.shzhong.filter.RoleOrFilter" id="roleOrFilter"/>
 
     <!--创建SecurityManager对象-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">

@@ -21,9 +21,11 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
         try {
+            // 设置 shiro 记住我功能
+            token.setRememberMe(user.getRememberMe());
             subject.login(token);
         } catch (AuthenticationException e) {
-            return e.getMessage();
+            e.printStackTrace();
         }
 
         if (subject.hasRole("admin")) {
@@ -37,7 +39,7 @@ public class UserController {
     @ResponseBody
     @RequiresRoles("admin")
     public String testRole() {
-        return "test role success";
+        return "testRole success";
     }
 
 
@@ -45,6 +47,18 @@ public class UserController {
     @ResponseBody
     @RequiresRoles("admin1")
     public String testRole1() {
-        return "test role success";
+        return "testRole1 success";
+    }
+
+    @RequestMapping(value = "/testPerms", method = RequestMethod.GET)
+    @ResponseBody
+    public String testPerms() {
+        return "testPerms success";
+    }
+
+    @RequestMapping(value = "/testPerms1", method = RequestMethod.GET)
+    @ResponseBody
+    public String testPerms1() {
+        return "testPerms1 success";
     }
 }
