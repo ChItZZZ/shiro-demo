@@ -2,18 +2,20 @@ package club.shzhong.dao.impl;
 
 import club.shzhong.dao.UserDao;
 import club.shzhong.domain.User;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.util.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 
 @Component
+@Slf4j
 public class UserDaoImpl implements UserDao {
 
-    @Resource
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override

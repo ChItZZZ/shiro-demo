@@ -17,21 +17,10 @@
             <value>
                 /login.html = anon
                 /subLogin = anon
-                /testRole = rolesOr["admin","admin1"]
-                /testRole1 = roles["admin","admin1"]
-                /testPerms = perms["user:delete"]
-                /testPerms1 = perms["user:delete","user:update"]
                 /* = authc
             </value>
         </property>
-        <property name="filters">
-            <util:map>
-                <entry key="roleOr" value-ref="roleOrFilter"/>
-            </util:map>
-        </property>
     </bean>
-
-    <bean class="club.shzhong.filter.RoleOrFilter" id="roleOrFilter"/>
 
     <!--创建SecurityManager对象-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
