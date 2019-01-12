@@ -28,6 +28,8 @@ public class UserController {
             e.printStackTrace();
         }
 
+        System.out.println("git test rebase");
+        
         if (subject.hasRole("admin")) {
             return "有admin权限";
         }
