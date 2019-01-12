@@ -28,9 +28,9 @@ public class UserController {
             e.printStackTrace();
         }
 
-        System.out.println("git test rebase");
+        System.out.println("git test rebase1");
 
-        System.out.println("git test rebase2");
+        System.out.println("git test rebase3");
 
         if (subject.hasRole("admin")) {
             return "有admin权限";
